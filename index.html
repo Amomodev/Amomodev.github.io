@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journées des Universités 2026 - Interactive Map</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="main-header">
+            <h1>JU 2026 Map</h1>
+            <p>Navigate the fair and find your future.</p>
+        </header>
+
+        <!-- Search & Quiz Controls -->
+        <section class="controls-section">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for a school, diploma, or field..."
+                    aria-label="Search stands">
+                <button id="searchBtn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="quiz-container">
+                <button id="toggleQuizBtn" class="primary-btn">Find My Stand (Quiz)</button>
+                <div id="quizPanel" class="quiz-panel hidden">
+                    <h3>Find Your Perfect Match</h3>
+                    <div class="quiz-question">
+                        <label>High School Specialties (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="specialty" value="math"> Mathematics</label>
+                            <label><input type="checkbox" name="specialty" value="phys"> Physics/Chemistry</label>
+                            <label><input type="checkbox" name="specialty" value="nsi"> NSI (Comp Sci)</label>
+                            <label><input type="checkbox" name="specialty" value="si"> SI (Engineering)</label>
+                            <label><input type="checkbox" name="specialty" value="svt"> SVT (Biology)</label>
+                            <label><input type="checkbox" name="specialty" value="ses"> SES (Eco/Soc)</label>
+                            <label><input type="checkbox" name="specialty" value="hlp"> HLP (Humanities)</label>
+                            <label><input type="checkbox" name="specialty" value="llce"> LLCER (Languages)</label>
+                            <label><input type="checkbox" name="specialty" value="arts"> Arts</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label>Work-Study (Alternance)?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="alternance" value="yes"> Yes, interested</label>
+                            <label><input type="radio" name="alternance" value="no"> No, full-time student</label>
+                            <label><input type="radio" name="alternance" value="any" checked> Doesn't matter</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label>What fits you best?</label>
+                        <select id="vibe">
+                            <option value="">Select a vibe...</option>
+                            <option value="builder">I want to build / optimize things (Tech, Engineering, Manual)
+                            </option>
+                            <option value="helper">I want to help people (Health, Social, Teaching)</option>
+                            <option value="analyzer">I like analyzing & debating (Law, Science, Eco)</option>
+                            <option value="creative">I am creative / Artist (Arts, Com, Design)</option>
+                            <option value="nature">I love nature & outdoors (Agriculture, Bio, Sport)</option>
+                            <option value="action">I want action / discipline (Army, Police, Sport)</option>
+                        </select>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label for="duration">Study Duration</label>
+                        <select id="duration">
+                            <option value="">Any</option>
+                            <option value="short">Short (2-3 years: BTS, BUT)</option>
+                            <option value="long">Long (5+ years: Master, Engineering)</option>
+                        </select>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label for="field">Field of Interest</label>
+                        <select id="field">
+                            <option value="">Any</option>
+                            <option value="agriculture">Agriculture & Environment</option>
+                            <option value="science">Sciences & Health</option>
+                            <option value="law">Law, Admin & Politics</option>
+                            <option value="economics">Economics & Management</option>
+                            <option value="arts">Arts, Letters & Languages</option>
+                            <option value="tech">Technology & Engineering</option>
+                            <option value="social">Social & Education</option>
+                            <option value="forces">Army & Police</option>
+                        </select>
+                    </div>
+                    <div class="quiz-actions">
+                        <button id="submitQuiz" class="accent-btn">Show Matches</button>
+                        <button id="resetQuiz" class="text-btn">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </section>
+
+        <!-- Map Legend -->
+        <section class="legend-section">
+            <div class="legend-item"><span class="dot science"></span> Science/Health</div>
+            <div class="legend-item"><span class="dot law"></span> Law/Politics</div>
+            <div class="legend-item"><span class="dot economics"></span> Eco/Management</div>
+            <div class="legend-item"><span class="dot arts"></span> Arts/Letters</div>
+            <div class="legend-item"><span class="dot agriculture"></span> Agriculture</div>
+            <div class="legend-item"><span class="dot international"></span> International</div>
+            <div class="legend-item"><span class="dot tech"></span> Tech/Engineering</div>
+            <div class="legend-item"><span class="dot social"></span> Social/Education</div>
+            <div class="legend-item"><span class="dot forces"></span> Forces</div>
+            <div class="legend-item"><span class="dot other"></span> Other</div>
+        </section>
+
+        <!-- Map Grid -->
+        <main class="map-container">
+            <div id="standGrid" class="stand-grid">
+                <!-- Grid items generated by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>&copy; 2026 Journées des Universités. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact</a>
+            <a href="https://ju-strasbourg.fr" target="_blank">Official Website</a>
+        </div>
+    </footer>
+
+    <!-- Modal Overlay -->
+    <div id="standModal" class="modal-overlay hidden" aria-hidden="true">
+        <div class="modal-card">
+            <button id="closeModal" class="close-btn" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <span id="modalStandNumber" class="stand-badge">Stand 00</span>
+                <h2 id="modalTitle">Institution Name</h2>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription" class="stand-description">Description goes here...</p>
+                <div id="modalTags" class="tags-container">
+                    <!-- Tags generated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

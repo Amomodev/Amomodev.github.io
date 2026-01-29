@@ -1,0 +1,546 @@
+/* Global Design System */
+:root {
+    --primary-bg: #f4f6f9;
+    --card-bg: #ffffff;
+    --text-primary: #1a1a2e;
+    --text-secondary: #6e7c8e;
+    --accent-color: #4361ee;
+    --accent-hover: #3046c6;
+    --border-radius: 12px;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Category Colors - Expanded */
+    --color-science: #4cc9f0;
+    --color-law: #f72585;
+    --color-economics: #f8961e;
+    --color-arts: #7209b7;
+    --color-agriculture: #4caf50;
+    --color-international: #ef476f;
+    --color-tech: #4895ef;
+    --color-social: #f48c06;
+    --color-forces: #6c757d;
+    --color-other: #bec3c9;
+    --color-highlight: #ffdd00;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Header */
+.main-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+}
+
+.main-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-color), var(--color-arts));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main-header p {
+    color: var(--text-secondary);
+}
+
+/* Search & Quiz Controls */
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .controls-section {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+
+.search-container {
+    position: relative;
+    flex: 1;
+    max-width: 500px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    padding-right: 3rem;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-soft);
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+#searchBtn {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+/* Quiz Styles */
+.quiz-container {
+    flex: 1;
+    max-width: 600px;
+    /* Made slightly wider for checkboxes */
+}
+
+.primary-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.primary-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.quiz-panel {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    margin-top: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.quiz-panel.hidden {
+    display: none;
+}
+
+.quiz-panel h3 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.quiz-question {
+    margin-bottom: 1rem;
+}
+
+.quiz-question label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Checkbox & Radio Groups */
+.checkbox-group,
+.radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.5rem;
+}
+
+.checkbox-group label,
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    background: #f8fafc;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+}
+
+.checkbox-group label:hover,
+.radio-group label:hover {
+    background: #f1f5f9;
+}
+
+.quiz-question select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.quiz-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.accent-btn {
+    background-color: var(--text-primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.text-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+/* Legend */
+.legend-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.science {
+    background-color: var(--color-science);
+}
+
+.dot.law {
+    background-color: var(--color-law);
+}
+
+.dot.economics {
+    background-color: var(--color-economics);
+}
+
+.dot.arts {
+    background-color: var(--color-arts);
+}
+
+.dot.agriculture {
+    background-color: var(--color-agriculture);
+}
+
+.dot.international {
+    background-color: var(--color-international);
+}
+
+.dot.tech {
+    background-color: var(--color-tech);
+}
+
+.dot.social {
+    background-color: var(--color-social);
+}
+
+.dot.forces {
+    background-color: var(--color-forces);
+}
+
+.dot.other {
+    background-color: var(--color-other);
+}
+
+/* Map Grid */
+.map-container {
+    overflow-x: auto;
+    padding-bottom: 2rem;
+}
+
+.stand-grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .stand-grid {
+        grid-template-columns: repeat(15, 1fr);
+        gap: 12px;
+    }
+}
+
+.stand-item {
+    aspect-ratio: 1 / 1;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.stand-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-color);
+    z-index: 2;
+}
+
+/* Footer */
+.main-footer {
+    background-color: #1a1a2e;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    margin-top: 4rem;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.main-footer p {
+    margin-bottom: 1rem;
+    color: #a0aec0;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Category Colors via border or background */
+/* Using a more vivid style: faint background + solid bottom border */
+.stand-item.science {
+    background: rgba(76, 201, 240, 0.1);
+    border-color: var(--color-science);
+    color: var(--color-science);
+}
+
+.stand-item.law {
+    background: rgba(247, 37, 133, 0.1);
+    border-color: var(--color-law);
+    color: var(--color-law);
+}
+
+.stand-item.economics {
+    background: rgba(248, 150, 30, 0.1);
+    border-color: var(--color-economics);
+    color: var(--color-economics);
+}
+
+.stand-item.arts {
+    background: rgba(114, 9, 183, 0.1);
+    border-color: var(--color-arts);
+    color: var(--color-arts);
+}
+
+.stand-item.agriculture {
+    background: rgba(76, 175, 80, 0.1);
+    border-color: var(--color-agriculture);
+    color: var(--color-agriculture);
+}
+
+.stand-item.international {
+    background: rgba(239, 71, 111, 0.1);
+    border-color: var(--color-international);
+    color: var(--color-international);
+}
+
+.stand-item.tech {
+    background: rgba(72, 149, 239, 0.1);
+    border-color: var(--color-tech);
+    color: var(--color-tech);
+}
+
+.stand-item.social {
+    background: rgba(244, 140, 6, 0.1);
+    border-color: var(--color-social);
+    color: var(--color-social);
+}
+
+.stand-item.forces {
+    background: rgba(108, 117, 125, 0.1);
+    border-color: var(--color-forces);
+    color: var(--color-forces);
+}
+
+.stand-item.other {
+    border-color: var(--color-other);
+}
+
+/* Highlight State */
+.stand-item.highlight {
+    background-color: rgba(255, 221, 0, 0.2);
+    border: 2px solid var(--color-highlight);
+    color: black;
+    animation: pulse 2s infinite;
+}
+
+.stand-item.dimmed {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 221, 0, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 221, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 221, 0, 0);
+    }
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-card {
+    background: var(--card-bg);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay:not(.hidden) .modal-card {
+    transform: translateY(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.modal-header {
+    margin-bottom: 1.5rem;
+    padding-right: 2rem;
+}
+
+.stand-badge {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.modal-body p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: #f1f5f9;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
