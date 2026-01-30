@@ -15,16 +15,16 @@
     <div class="app-container">
         <!-- Header -->
         <header class="main-header">
-            <h1>JU 2026 Map</h1>
-            <p>Navigate the fair and find your future.</p>
+            <h1>Plan JU 2026</h1>
+            <p>Naviguez dans le salon et trouvez votre avenir.</p>
         </header>
 
         <!-- Search & Quiz Controls -->
         <section class="controls-section">
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search for a school, diploma, or field..."
-                    aria-label="Search stands">
-                <button id="searchBtn" aria-label="Search">
+                <input type="text" id="searchInput" placeholder="Rechercher une école, un diplôme ou un domaine..."
+                    aria-label="Rechercher un stand">
+                <button id="searchBtn" aria-label="Rechercher">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -34,73 +34,73 @@
             </div>
 
             <div class="quiz-container">
-                <button id="toggleQuizBtn" class="primary-btn">Find My Stand (Quiz)</button>
+                <button id="toggleQuizBtn" class="primary-btn">Trouver mon stand (Quiz)</button>
                 <div id="quizPanel" class="quiz-panel hidden">
-                    <h3>Find Your Perfect Match</h3>
+                    <h3>Trouvez votre formation idéale</h3>
                     <div class="quiz-question">
-                        <label>High School Specialties (Select all that apply)</label>
+                        <label>Spécialités de Lycée (Sélectionnez tout ce qui s'applique)</label>
                         <div class="checkbox-group">
-                            <label><input type="checkbox" name="specialty" value="math"> Mathematics</label>
-                            <label><input type="checkbox" name="specialty" value="phys"> Physics/Chemistry</label>
-                            <label><input type="checkbox" name="specialty" value="nsi"> NSI (Comp Sci)</label>
-                            <label><input type="checkbox" name="specialty" value="si"> SI (Engineering)</label>
-                            <label><input type="checkbox" name="specialty" value="svt"> SVT (Biology)</label>
-                            <label><input type="checkbox" name="specialty" value="ses"> SES (Eco/Soc)</label>
-                            <label><input type="checkbox" name="specialty" value="hlp"> HLP (Humanities)</label>
-                            <label><input type="checkbox" name="specialty" value="llce"> LLCER (Languages)</label>
+                            <label><input type="checkbox" name="specialty" value="math"> Mathématiques</label>
+                            <label><input type="checkbox" name="specialty" value="phys"> Physique/Chimie</label>
+                            <label><input type="checkbox" name="specialty" value="nsi"> NSI (Informatique)</label>
+                            <label><input type="checkbox" name="specialty" value="si"> SI (Ingénieur)</label>
+                            <label><input type="checkbox" name="specialty" value="svt"> SVT (Biologie)</label>
+                            <label><input type="checkbox" name="specialty" value="ses"> SES (Éco/Soc)</label>
+                            <label><input type="checkbox" name="specialty" value="hlp"> HLP (Humanités)</label>
+                            <label><input type="checkbox" name="specialty" value="llce"> LLCER (Langues)</label>
                             <label><input type="checkbox" name="specialty" value="arts"> Arts</label>
                         </div>
                     </div>
 
                     <div class="quiz-question">
-                        <label>Work-Study (Alternance)?</label>
+                        <label>Alternance ?</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="alternance" value="yes"> Yes, interested</label>
-                            <label><input type="radio" name="alternance" value="no"> No, full-time student</label>
-                            <label><input type="radio" name="alternance" value="any" checked> Doesn't matter</label>
+                            <label><input type="radio" name="alternance" value="yes"> Oui, intéressé(e)</label>
+                            <label><input type="radio" name="alternance" value="no"> Non, étudiant temps plein</label>
+                            <label><input type="radio" name="alternance" value="any" checked> Peu importe</label>
                         </div>
                     </div>
 
                     <div class="quiz-question">
-                        <label>What fits you best?</label>
+                        <label>Qu'est-ce qui vous correspond le mieux ?</label>
                         <select id="vibe">
-                            <option value="">Select a vibe...</option>
-                            <option value="builder">I want to build / optimize things (Tech, Engineering, Manual)
+                            <option value="">Sélectionnez une ambiance...</option>
+                            <option value="builder">Je veux construire / optimiser (Tech, Ingénierie, Manuel)
                             </option>
-                            <option value="helper">I want to help people (Health, Social, Teaching)</option>
-                            <option value="analyzer">I like analyzing & debating (Law, Science, Eco)</option>
-                            <option value="creative">I am creative / Artist (Arts, Com, Design)</option>
-                            <option value="nature">I love nature & outdoors (Agriculture, Bio, Sport)</option>
-                            <option value="action">I want action / discipline (Army, Police, Sport)</option>
+                            <option value="helper">Je veux aider les gens (Santé, Social, Enseignement)</option>
+                            <option value="analyzer">J'aime analyser & débattre (Droit, Sciences, Éco)</option>
+                            <option value="creative">Je suis créatif / Artiste (Arts, Com, Design)</option>
+                            <option value="nature">J'aime la nature & l'extérieur (Agriculture, Bio, Sport)</option>
+                            <option value="action">Je veux de l'action / discipline (Armée, Police, Sport)</option>
                         </select>
                     </div>
 
                     <div class="quiz-question">
-                        <label for="duration">Study Duration</label>
+                        <label for="duration">Durée des études</label>
                         <select id="duration">
-                            <option value="">Any</option>
-                            <option value="short">Short (2-3 years: BTS, BUT)</option>
-                            <option value="long">Long (5+ years: Master, Engineering)</option>
+                            <option value="">Peu importe</option>
+                            <option value="short">Court (2-3 ans : BTS, BUT)</option>
+                            <option value="long">Long (5+ ans : Master, Ingénieur)</option>
                         </select>
                     </div>
 
                     <div class="quiz-question">
-                        <label for="field">Field of Interest</label>
+                        <label for="field">Domaine d'intérêt</label>
                         <select id="field">
-                            <option value="">Any</option>
-                            <option value="agriculture">Agriculture & Environment</option>
-                            <option value="science">Sciences & Health</option>
-                            <option value="law">Law, Admin & Politics</option>
-                            <option value="economics">Economics & Management</option>
-                            <option value="arts">Arts, Letters & Languages</option>
-                            <option value="tech">Technology & Engineering</option>
-                            <option value="social">Social & Education</option>
-                            <option value="forces">Army & Police</option>
+                            <option value="">Peu importe</option>
+                            <option value="agriculture">Agriculture & Environnement</option>
+                            <option value="science">Sciences & Santé</option>
+                            <option value="law">Droit, Admin & Politique</option>
+                            <option value="economics">Économie & Gestion</option>
+                            <option value="arts">Arts, Lettres & Langues</option>
+                            <option value="tech">Technologie & Ingénierie</option>
+                            <option value="social">Social & Éducation</option>
+                            <option value="forces">Armée & Sécurité</option>
                         </select>
                     </div>
                     <div class="quiz-actions">
-                        <button id="submitQuiz" class="accent-btn">Show Matches</button>
-                        <button id="resetQuiz" class="text-btn">Reset</button>
+                        <button id="submitQuiz" class="accent-btn">Afficher les résultats</button>
+                        <button id="resetQuiz" class="text-btn">Réinitialiser</button>
                     </div>
                 </div>
             </div>
@@ -110,16 +110,16 @@
 
         <!-- Map Legend -->
         <section class="legend-section">
-            <div class="legend-item"><span class="dot science"></span> Science/Health</div>
-            <div class="legend-item"><span class="dot law"></span> Law/Politics</div>
-            <div class="legend-item"><span class="dot economics"></span> Eco/Management</div>
-            <div class="legend-item"><span class="dot arts"></span> Arts/Letters</div>
+            <div class="legend-item"><span class="dot science"></span> Sciences/Santé</div>
+            <div class="legend-item"><span class="dot law"></span> Droit/Politique</div>
+            <div class="legend-item"><span class="dot economics"></span> Éco/Gestion</div>
+            <div class="legend-item"><span class="dot arts"></span> Arts/Lettres</div>
             <div class="legend-item"><span class="dot agriculture"></span> Agriculture</div>
             <div class="legend-item"><span class="dot international"></span> International</div>
-            <div class="legend-item"><span class="dot tech"></span> Tech/Engineering</div>
-            <div class="legend-item"><span class="dot social"></span> Social/Education</div>
-            <div class="legend-item"><span class="dot forces"></span> Forces</div>
-            <div class="legend-item"><span class="dot other"></span> Other</div>
+            <div class="legend-item"><span class="dot tech"></span> Tech/Ingénierie</div>
+            <div class="legend-item"><span class="dot social"></span> Social/Éducation</div>
+            <div class="legend-item"><span class="dot forces"></span> Forces/Sécurité</div>
+            <div class="legend-item"><span class="dot other"></span> Autre</div>
         </section>
 
         <!-- Map Grid -->
@@ -132,11 +132,11 @@
 
     <!-- Footer -->
     <footer class="main-footer">
-        <p>&copy; 2026 Journées des Universités. All rights reserved.</p>
+        <p>&copy; 2026 Journées des Universités. Tous droits réservés.</p>
         <div class="footer-links">
-            <a href="#">Privacy Policy</a>
+            <a href="#">Politique de confidentialité</a>
             <a href="#">Contact</a>
-            <a href="https://ju-strasbourg.fr" target="_blank">Official Website</a>
+            <a href="https://ju-strasbourg.fr" target="_blank">Site Officiel</a>
         </div>
     </footer>
 
