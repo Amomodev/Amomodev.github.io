@@ -4,6 +4,23 @@
  * Data source: JU_plan_2025.pdf
  */
 
+// --- Translations ---
+const typeTranslations = {
+    "social": "Social",
+    "international": "International",
+    "vie-etudiante": "Vie Étudiante",
+    "artisanat": "Artisanat",
+    "agriculture": "Agriculture",
+    "science": "Sciences",
+    "tech": "Technologie / IUT",
+    "forces": "Armée / Sécurité",
+    "law": "Droit / Admin",
+    "economics": "Économie / Gestion",
+    "arts": "Arts / Lettres",
+    "sante": "Santé",
+    "other": "Autre"
+};
+
 console.log('JU 2026 Map App Initializing...');
 
 // --- Data extracted from JU_plan_2025.pdf ---
@@ -169,9 +186,91 @@ const standDataRaw = [
     // --- UNKNOWN PLACES (Fillers) ---
 ];
 
-// Flatten the data for easier access by ID
+// --- Data extracted from stands.json ---
+const newStandData = [
+    { "stand": 1, "etablissement": "Espace Orientation & Réussite", "sujet": "Parcoursup, orientation, aide à la réussite", "alternance": "Non", "autres": "Projet Noria, IDIP, Points conseil flash [cite: 781, 784]" },
+    { "stand": 2, "etablissement": "Espace International - Euroguidance", "sujet": "Mobilité internationale", "alternance": "Non", "autres": "Conseils pour l'étranger [cite: 786, 787]" },
+    { "stand": 3, "etablissement": "Espace International - Agentur für Arbeit", "sujet": "Études et formations en Allemagne", "alternance": "Non", "autres": "Berufsberatung [cite: 787]" },
+    { "stand": 4, "etablissement": "Espace International - EF Education First", "sujet": "Séjours linguistiques", "alternance": "Non", "autres": "Cours de langues [cite: 788, 789]" },
+    { "stand": 7, "etablissement": "Vie Étudiante - Crous de Strasbourg", "sujet": "Bourses, logement, restauration", "alternance": "Non", "autres": "Accompagnement social [cite: 795, 796]" },
+    { "stand": 8, "etablissement": "Vie Étudiante - Unistra / SVU", "sujet": "Culture, Handicap, Vie associative", "alternance": "Non", "autres": "Carte Culture [cite: 802, 803, 804]" },
+    { "stand": 10, "etablissement": "Lycées Agricoles / CFA / CFPPA", "sujet": "Métiers du vert, agronomie, cultures", "alternance": "Oui (CFA)", "autres": "Erstein, Colmar, Obernai [cite: 815]" },
+    { "stand": 11, "etablissement": "Lycées Agricoles / CFA / CFPPA", "sujet": "Aménagements paysagers, forêt", "alternance": "Oui (CFA)", "autres": "Rouffach, Bouxwiller [cite: 815, 816]" },
+    { "stand": 13, "etablissement": "UniLaSalle", "sujet": "Institut polytechnique", "alternance": "Non spécifié", "autres": "Ingénieur [cite: 821]" },
+    { "stand": 15, "etablissement": "Université de Liège", "sujet": "Gembloux Agro-Bio Tech", "alternance": "Non", "autres": "Belgique [cite: 820]" },
+    { "stand": 16, "etablissement": "Lycée Heinrich-Nessel (Haguenau)", "sujet": "Systèmes automatiques, cybersécurité", "alternance": "Oui (UFA)", "autres": "BTS, CPGE [cite: 865, 867, 883]" },
+    { "stand": 17, "etablissement": "Lycée Heinrich-Nessel (Haguenau)", "sujet": "Électrotechnique", "alternance": "Oui (UFA)", "autres": "BTS [cite: 865, 867]" },
+    { "stand": 18, "etablissement": "Lycée Heinrich-Nessel (Haguenau)", "sujet": "Fluides, énergies, domotique", "alternance": "Oui (UFA)", "autres": "BTS [cite: 865, 867]" },
+    { "stand": 19, "etablissement": "Pôle Formation UIMM - CFAI Alsace", "sujet": "Assistance technique d'ingénieur", "alternance": "Oui (CFAI)", "autres": "Maintenance des systèmes [cite: 824, 867]" },
+    { "stand": 20, "etablissement": "Pôle Formation UIMM - CFAI Alsace", "sujet": "Conception de produits industriels", "alternance": "Oui (CFAI)", "autres": "Chaudronnerie [cite: 824, 867]" },
+    { "stand": 23, "etablissement": "Lycée Jean Rostand (Strasbourg)", "sujet": "Biologie médicale, Bioanalyses", "alternance": "Non spécifié", "autres": "Biotechnologie [cite: 871]" },
+    { "stand": 24, "etablissement": "Lycée Jean Rostand (Strasbourg)", "sujet": "Esthétique, mode, diététique", "alternance": "Non spécifié", "autres": "Cosmétique, parfumerie [cite: 871, 1107, 1108]" },
+    { "stand": 25, "etablissement": "Université de Haute-Alsace (UHA)", "sujet": "Biopôle Colmar, agronomie", "alternance": "Non spécifié", "autres": "Enologie, viticulture [cite: 811, 812, 813]" },
+    { "stand": 28, "etablissement": "Les Compagnons du Devoir", "sujet": "Artisanat", "alternance": "Oui (Apprentissage)", "autres": "Tour de France [cite: 807]" },
+    { "stand": 29, "etablissement": "Chambre de métiers d'Alsace", "sujet": "Artisanat, métiers techniques", "alternance": "Oui", "autres": "Orientation artisanale [cite: 808, 824]" },
+    { "stand": 30, "etablissement": "Chambre de métiers d'Alsace", "sujet": "Artisanat", "alternance": "Oui", "autres": "Apprentissage [cite: 808, 824]" },
+    { "stand": 37, "etablissement": "Unistra - Faculté des Sciences", "sujet": "Mathématiques", "alternance": "Non", "autres": "Filière universitaire [cite: 827, 828]" },
+    { "stand": 38, "etablissement": "Unistra - Faculté des Sciences", "sujet": "Informatique", "alternance": "Non", "autres": "Filière universitaire [cite: 827, 828]" },
+    { "stand": 39, "etablissement": "Unistra - Faculté des Sciences", "sujet": "Mathématique, informatique", "alternance": "Non", "autres": "Filière universitaire [cite: 827, 828]" },
+    { "stand": 41, "etablissement": "Unistra - Sciences de la vie", "sujet": "Biologie", "alternance": "Non", "autres": "Filière universitaire [cite: 830]" },
+    { "stand": 42, "etablissement": "Unistra - Sciences de la vie", "sujet": "Biologie", "alternance": "Non", "autres": "Filière universitaire [cite: 830]" },
+    { "stand": 50, "etablissement": "IUT de Haguenau", "sujet": "Génie électrique et info industrielle", "alternance": "Oui (BUT)", "autres": "GEII [cite: 844, 845]" },
+    { "stand": 55, "etablissement": "Lycée Couffignal (Strasbourg)", "sujet": "Conception de produits industriels", "alternance": "Non spécifié", "autres": "Processus réalisation [cite: 876, 877]" },
+    { "stand": 56, "etablissement": "Lycée Couffignal (Strasbourg)", "sujet": "Électronique, systèmes bois", "alternance": "Non spécifié", "autres": "Systèmes constructifs [cite: 876, 877]" },
+    { "stand": 60, "etablissement": "IUT de Mulhouse", "sujet": "Science et génie des matériaux", "alternance": "Oui (BUT)", "autres": "UHA [cite: 856, 861]" },
+    { "stand": 65, "etablissement": "Unistra - Physique & Ingénierie", "sujet": "Physique", "alternance": "Non", "autres": "Astrophysique [cite: 831]" },
+    { "stand": 66, "etablissement": "Unistra - Physique & Ingénierie", "sujet": "Ingénierie", "alternance": "Non", "autres": "Filière universitaire [cite: 831]" },
+    { "stand": 70, "etablissement": "Unistra - Faculté de Chimie", "sujet": "Chimie", "alternance": "Non", "autres": "CPES [cite: 832, 833]" },
+    { "stand": 71, "etablissement": "Unistra - Faculté de Chimie", "sujet": "Chimie", "alternance": "Non", "autres": "Cycle pluridisciplinaire [cite: 832, 833]" },
+    { "stand": 80, "etablissement": "ITII Alsace", "sujet": "Techniques d'ingénieur de l'industrie", "alternance": "Oui (Apprentissage)", "autres": "Partenaire Alsace Tech [cite: 905]" },
+    { "stand": 81, "etablissement": "ITII Alsace", "sujet": "Ingénierie industrielle", "alternance": "Oui (Apprentissage)", "autres": "Strasbourg / Mulhouse [cite: 905]" },
+    { "stand": 85, "etablissement": "ENSAS (Architecture)", "sujet": "Architecture", "alternance": "Non spécifié", "autres": "École nationale Strasbourg [cite: 898]" },
+    { "stand": 86, "etablissement": "ENSAS (Architecture)", "sujet": "Architecture", "alternance": "Non spécifié", "autres": "Strasbourg [cite: 898]" },
+    { "stand": 98, "etablissement": "CESI École d'ingénieurs", "sujet": "Programme professionnel supérieur", "alternance": "Oui", "autres": "Strasbourg [cite: 900]" },
+    { "stand": 99, "etablissement": "CESI École d'ingénieurs", "sujet": "Ingénierie", "alternance": "Oui", "autres": "Professionnel supérieur [cite: 900]" },
+    { "stand": 112, "etablissement": "Police Nationale", "sujet": "Sécurité", "alternance": "Non", "autres": "Concours et recrutement [cite: 919]" },
+    { "stand": 118, "etablissement": "Marine Nationale / Armée de l'Air", "sujet": "Défense", "alternance": "Non", "autres": "Métiers militaires [cite: 917, 918]" },
+    { "stand": 119, "etablissement": "Marine Nationale / Armée de l'Air", "sujet": "Défense", "alternance": "Non", "autres": "Armée de l'Air et de l'Espace [cite: 917, 918]" },
+    { "stand": 120, "etablissement": "Marine Nationale / Armée de l'Air", "sujet": "Défense", "alternance": "Non", "autres": "Métiers de l'armée [cite: 917, 918]" },
+    { "stand": 124, "etablissement": "Armée de Terre", "sujet": "Défense", "alternance": "Non", "autres": "Recrutement [cite: 921]" },
+    { "stand": 125, "etablissement": "Armée de Terre", "sujet": "Défense", "alternance": "Non", "autres": "Recrutement [cite: 921]" },
+    { "stand": 126, "etablissement": "Armée de Terre", "sujet": "Défense", "alternance": "Non", "autres": "Recrutement [cite: 921]" },
+    { "stand": 128, "etablissement": "UHA - Droit", "sujet": "Droit, administration, science politique", "alternance": "Non", "autres": "UHA [cite: 924, 925]" },
+    { "stand": 129, "etablissement": "UHA - Droit", "sujet": "Droit, administration", "alternance": "Non", "autres": "UHA [cite: 924, 925]" },
+    { "stand": 130, "etablissement": "Unistra - Droit / AES", "sujet": "Droit / Administration économique", "alternance": "Non", "autres": "Faculté de droit [cite: 926, 927]" },
+    { "stand": 131, "etablissement": "Unistra - Droit / AES", "sujet": "Droit / Administration sociale", "alternance": "Non", "autres": "Faculté de droit [cite: 926, 927]" },
+    { "stand": 134, "etablissement": "Sciences Po Strasbourg", "sujet": "Sciences Politiques", "alternance": "Non", "autres": "Filière d'excellence [cite: 929]" },
+    { "stand": 135, "etablissement": "Sciences Po Strasbourg", "sujet": "Sciences Politiques", "alternance": "Non", "autres": "Strasbourg [cite: 929]" },
+    { "stand": 143, "etablissement": "EM Strasbourg Business School", "sujet": "Management, gestion", "alternance": "Oui (certains cycles)", "autres": "Unistra [cite: 950, 1029]" },
+    { "stand": 144, "etablissement": "EM Strasbourg Business School", "sujet": "Économie, commerce", "alternance": "Oui", "autres": "Unistra [cite: 950, 1029]" },
+    { "stand": 146, "etablissement": "CNAM Strasbourg", "sujet": "Gestion, Comptabilité (DCG)", "alternance": "Oui", "autres": "DCG/DSCG [cite: 944, 1022, 1031]" },
+    { "stand": 147, "etablissement": "CNAM Strasbourg", "sujet": "Comptabilité, gestion", "alternance": "Oui", "autres": "Strasbourg [cite: 944, 1022, 1031]" },
+    { "stand": 149, "etablissement": "Lycée René Cassin", "sujet": "Expertise Comptable (DCG/CPGE)", "alternance": "Non spécifié", "autres": "CPGE [cite: 1018, 1023]" },
+    { "stand": 150, "etablissement": "Lycée René Cassin", "sujet": "Comptabilité (DCG)", "alternance": "Non spécifié", "autres": "Expertise [cite: 1018, 1023]" },
+    { "stand": 175, "etablissement": "Lycée René Cassin", "sujet": "Banque, commerce international", "alternance": "Non spécifié", "autres": "BTS [cite: 974, 975]" },
+    { "stand": 176, "etablissement": "Lycée René Cassin", "sujet": "Communication, comptabilité", "alternance": "Non spécifié", "autres": "BTS [cite: 974, 975]" },
+    { "stand": 177, "etablissement": "Lycée René Cassin", "sujet": "Gestion PME, Management commercial", "alternance": "Non spécifié", "autres": "BTS [cite: 974, 975, 976]" },
+    { "stand": 184, "etablissement": "Lycée Alexandre Dumas (Illkirch)", "sujet": "Hôtellerie-restauration, Tourisme", "alternance": "Non spécifié", "autres": "Management hôtelier [cite: 985, 986]" },
+    { "stand": 196, "etablissement": "CCI Campus Alsace - CFA", "sujet": "Vente, commerce, immobilier", "alternance": "Oui (CFA)", "autres": "Strasbourg [cite: 1002, 1024, 1032]" },
+    { "stand": 197, "etablissement": "CCI Campus Alsace - CFA", "sujet": "Gestion, RH, Comptabilité", "alternance": "Oui (CFA)", "autres": "Strasbourg [cite: 1002, 1024, 1032]" },
+    { "stand": 198, "etablissement": "CCI Campus Alsace - CFA", "sujet": "Informatique, Web, International", "alternance": "Oui (CFA)", "autres": "Strasbourg [cite: 1002, 1024, 1032]" },
+    { "stand": 202, "etablissement": "Lycée Sainte Clotilde", "sujet": "Commerce international, Communication", "alternance": "Non spécifié", "autres": "Marketing digital [cite: 1003]" },
+    { "stand": 203, "etablissement": "Lycée Sainte Clotilde", "sujet": "Sanitaire et social, RH", "alternance": "Non spécifié", "autres": "Évènementiel [cite: 1003]" },
+    { "stand": 204, "etablissement": "Lycée Sainte Clotilde", "sujet": "Prépa écoles de commerce", "alternance": "Non spécifié", "autres": "BTS divers [cite: 1003]" },
+    { "stand": 211, "etablissement": "CEFPPA - CFA hôtelier A. ZELLER", "sujet": "Hôtellerie-restauration", "alternance": "Oui (CFA)", "autres": "Illkirch [cite: 1012, 1013]" },
+    { "stand": 212, "etablissement": "CEFPPA - CFA hôtelier A. ZELLER", "sujet": "Hôtellerie", "alternance": "Oui (CFA)", "autres": "Illkirch [cite: 1012]" },
+    { "stand": 213, "etablissement": "CEFPPA - CFA hôtelier A. ZELLER", "sujet": "Restauration", "alternance": "Oui (CFA)", "autres": "Illkirch [cite: 1012]" },
+    { "stand": 257, "etablissement": "Démonstration Région Grand Est", "sujet": "Métiers du soin et du social", "alternance": "Non spécifié", "autres": "Mise en situation réelle [cite: 1089, 1147]" },
+    { "stand": 278, "etablissement": "Unistra - Faculté de Pharmacie", "sujet": "Santé", "alternance": "Non", "autres": "Pharmacie [cite: 1104]" },
+    { "stand": 279, "etablissement": "Unistra - Faculté de Pharmacie", "sujet": "Santé", "alternance": "Non", "autres": "Pharmacie [cite: 1104]" },
+    { "stand": 280, "etablissement": "Unistra - Chirurgie dentaire", "sujet": "Santé", "alternance": "Non", "autres": "Odontologie [cite: 1105]" },
+    { "stand": 281, "etablissement": "Unistra - Chirurgie dentaire", "sujet": "Santé", "alternance": "Non", "autres": "Strasbourg [cite: 1105]" }
+];
+
+// Flatten the data for easier access by ID AND Merge
 const standMap = new Map();
 
+// 1. Load Old Data (Priority)
 standDataRaw.forEach(item => {
     item.ids.forEach(id => {
         standMap.set(id, {
@@ -185,6 +284,52 @@ standDataRaw.forEach(item => {
     });
 });
 
+// Helper to determine type based on strings
+function determineType(name, sujet) {
+    const text = (name + " " + sujet).toLowerCase();
+
+    if (text.includes('orientation') || text.includes('reussite') || text.includes('réussite')) return 'social';
+    if (text.includes('international') || text.includes('allemagne') || text.includes('linguistique') || text.includes('europe')) return 'international';
+    if (text.includes('vie étudiante') || text.includes('crous') || text.includes('bourses') || text.includes('culture')) return 'vie-etudiante';
+    if (text.includes('agricole') || text.includes('agronomie') || text.includes('paysage') || text.includes('forêt') || text.includes('vigne') || text.includes('environnement')) return 'agriculture';
+    if (text.includes('artisanat') || text.includes('compagnons') || text.includes('métiers')) return 'artisanat';
+    if (text.includes('armée') || text.includes('police') || text.includes('défense') || text.includes('sécurité')) return 'forces';
+    if (text.includes('droit') || text.includes('juridique') || text.includes('avocat') || text.includes('science politique') || text.includes('admin') || text.includes('sciences po')) return 'law';
+    if (text.includes('économie') || text.includes('gestion') || text.includes('commerce') || text.includes('management') || text.includes('banque') || text.includes('business') || text.includes('comptabilité') || text.includes('vente') || text.includes('rh') || text.includes('immobilier') || text.includes('tourisme') || text.includes('hôtellerie')) return 'economics';
+    if (text.includes('art') || text.includes('design') || text.includes('mode') || text.includes('musique') || text.includes('cinéma') || text.includes('lettres') || text.includes('langues') || text.includes('communication') || text.includes('culture')) return 'arts';
+    if (text.includes('santé') || text.includes('médecine') || text.includes('pharmacie') || text.includes('soin') || text.includes('dentaire') || text.includes('biologie') || text.includes('médicale') || text.includes('social')) return 'sante'; // Priority catch for Sante
+    if (text.includes('science') || text.includes('math') || text.includes('physique') || text.includes('chimie') || text.includes('svt')) return 'science';
+
+    return 'tech'; // Default fallback for Lycées/IUTs not caught above
+}
+
+newStandData.forEach(item => {
+    // Only add if not already present (Old Script Priority)
+    if (standMap.has(item.stand)) return;
+
+    const type = determineType(item.etablissement, item.sujet);
+    const tags = [];
+
+    // Auto-tagging based on detected keywords for search
+    if (item.alternance && item.alternance.toLowerCase().includes('oui')) tags.push('alternance');
+    if (type === 'science') tags.push('science', 'math', 'phys');
+    if (type === 'tech') tags.push('tech', 'si', 'nsi', 'engineering');
+    if (type === 'agriculture') tags.push('agriculture', 'environment');
+    if (type === 'sante') tags.push('health', 'social');
+    if (type === 'economics') tags.push('business', 'economics');
+    if (type === 'law') tags.push('law', 'politics');
+    if (type === 'arts') tags.push('art', 'design');
+
+    standMap.set(item.stand, {
+        id: item.stand,
+        name: item.etablissement,
+        description: item.sujet + (item.autres ? " - " + item.autres : ""),
+        type: type,
+        tags: tags,
+        alternance: item.alternance && item.alternance.toLowerCase().includes('oui')
+    });
+});
+
 // Helper to find data by ID
 function getStandDetails(id) {
     if (standMap.has(id)) {
@@ -195,7 +340,7 @@ function getStandDetails(id) {
     return {
         id: id,
         name: `Stand ${id}`,
-        description: "Information pending...",
+        description: "Information en attente...",
         type: "other",
         tags: [],
         alternance: false
@@ -238,7 +383,7 @@ function initMap() {
 function openModal(data) {
     document.getElementById('modalStandNumber').textContent = `Stand ${data.id}`;
     document.getElementById('modalTitle').textContent = data.name;
-    document.getElementById('modalDescription').textContent = data.description || "No specific description available.";
+    document.getElementById('modalDescription').textContent = data.description || "Aucune description disponible.";
 
     const tagsContainer = document.getElementById('modalTags');
     tagsContainer.innerHTML = '';
@@ -248,7 +393,7 @@ function openModal(data) {
     typeSpan.className = 'tag';
     typeSpan.style.backgroundColor = 'var(--text-secondary)';
     typeSpan.style.color = 'white';
-    typeSpan.textContent = data.type.toUpperCase();
+    typeSpan.textContent = (typeTranslations[data.type] || data.type).toUpperCase();
     tagsContainer.appendChild(typeSpan);
 
     if (data.alternance) {
@@ -330,7 +475,7 @@ submitQuizBtn.addEventListener('click', () => {
     const vibe = document.getElementById('vibe').value;
 
     if (specialties.length === 0 && !duration && !field && !vibe && alternanceValue === 'any') {
-        alert("Please select at least one option to find matches.");
+        alert("Veuillez sélectionner au moins une option pour trouver des résultats.");
         return;
     }
 
@@ -404,7 +549,7 @@ submitQuizBtn.addEventListener('click', () => {
     if (hasMatch) {
         standGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-        alert("No strong matches found. Try broadening your criteria.");
+        alert("Aucun résultat pertinent trouvé. Essayez d'élargir vos critères.");
         stands.forEach(s => s.classList.remove('dimmed')); // Reset view
     }
 });
@@ -425,3 +570,4 @@ resetQuizBtn.addEventListener('click', () => {
 });
 
 initMap();
+
