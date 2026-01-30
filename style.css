@@ -22,6 +22,9 @@
     --color-forces: #6c757d;
     --color-other: #bec3c9;
     --color-highlight: #ffdd00;
+    --color-sante: #e91e63;
+    --color-artisanat: #8d6e63;
+    --color-vie-etudiante: #00bcd4;
 }
 
 * {
@@ -288,6 +291,18 @@ body {
     background-color: var(--color-other);
 }
 
+.dot.sante {
+    background-color: var(--color-sante);
+}
+
+.dot.artisanat {
+    background-color: var(--color-artisanat);
+}
+
+.dot.vie-etudiante {
+    background-color: var(--color-vie-etudiante);
+}
+
 /* Map Grid */
 .map-container {
     overflow-x: auto;
@@ -424,6 +439,24 @@ body {
 
 .stand-item.other {
     border-color: var(--color-other);
+}
+
+.stand-item.sante {
+    background: rgba(233, 30, 99, 0.1);
+    border-color: var(--color-sante);
+    color: var(--color-sante);
+}
+
+.stand-item.artisanat {
+    background: rgba(141, 110, 99, 0.1);
+    border-color: var(--color-artisanat);
+    color: var(--color-artisanat);
+}
+
+.stand-item.vie-etudiante {
+    background: rgba(0, 188, 212, 0.1);
+    border-color: var(--color-vie-etudiante);
+    color: var(--color-vie-etudiante);
 }
 
 /* Highlight State */
